@@ -1,4 +1,4 @@
-# gibu
+# GIBU
 
 A new Flutter project.
 

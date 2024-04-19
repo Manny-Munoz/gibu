@@ -4,7 +4,7 @@ class TextAlignmentLeft extends StatelessWidget {
   final String text;
   final double textSize;
   final Color textColor;
-  const TextAlignmentLeft({super.key, required this.text, this.textSize = 22, this.textColor = Colors.black});
+  const TextAlignmentLeft({super.key, required this.text, this.textSize = 20, this.textColor = Colors.black});
 
   @override
   Widget build(BuildContext context) {

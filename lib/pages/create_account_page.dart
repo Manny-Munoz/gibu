@@ -63,6 +63,7 @@ class CreateAccountPage extends StatelessWidget {
                   Button(onTap: () => Navigator.pushNamed(context, '/')),
                   const SizedBox(height: 70),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text(
                         "Already have an account?",

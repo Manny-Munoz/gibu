@@ -49,6 +49,7 @@ class LoginPage extends StatelessWidget {
             const Row(mainAxisAlignment: MainAxisAlignment.center, children: [ImageCard(imagePath: "lib/images/facebook.png"), SizedBox(width:20), ImageCard(imagePath: "lib/images/google.png"), SizedBox(width: 20), ImageCard(imagePath: "lib/images/apple.png")],),
             const SizedBox(height: 70),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text("Don't have an account?", style: TextStyle(fontSize: 16),),
                 GestureDetector(onTap: () => Navigator.pushNamed(context, "/createAccountPage") , child: const Text("Sign up", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),)),

@@ -7,7 +7,7 @@ import "package:gibu/components/button.dart";
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
-  final emailConstroller = TextEditingController();
+  final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
   @override
@@ -32,7 +32,7 @@ class LoginPage extends StatelessWidget {
           const SizedBox(height: 15),
           const TextAlignmentLeft(text: "Email address"),
           const SizedBox(height: 9),
-          InputText(controller: emailConstroller, hintText: "Your email", obscureText: false),
+          InputText(controller: emailController, hintText: "Your email", obscureText: false),
           const SizedBox(height: 15),
           const TextAlignmentLeft(text: "Password"),
           const SizedBox(height: 9),

@@ -16,9 +16,9 @@ class WelcomePage extends StatelessWidget {
         const TextAlignmentLeft(text: "Gibu What you can"),
         const TextAlignmentLeft(text: "Together we can change our society", textSize: 15),
         const SizedBox(height: 30),
-        const Button(text: "Create Account", buttonColor: Colors.white, textColor: Color.fromARGB(255, 23, 77, 77)),
+        Button(text: "Create Account", buttonColor: Colors.white, textColor: const Color.fromARGB(255, 23, 77, 77), onTap: () => Navigator.pushNamed(context, '/createAccountPage')),
         const SizedBox(height: 20),
-        const Button(),
+        Button(onTap: () => Navigator.pushNamed(context, '/login')),
         const SizedBox(height: 20),
 
       ])),

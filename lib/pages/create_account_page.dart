@@ -58,11 +58,22 @@ class CreateAccountPage extends StatelessWidget {
                     text: "I accept the terms and privacy policy",
                     textSize: 15),
                 const SizedBox(height: 60),
-                const Button(),
+                Button(onTap: () => Navigator.pushNamed(context, '/')),
                 const SizedBox(height: 70),
-                const Text(
-                  "Already have an account?  Log in",
-                  style: TextStyle(fontSize: 16),
+                Row(
+                  children: [
+                    const Text(
+                      "Already have an account?",
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    GestureDetector(
+                      onTap: () => Navigator.pushNamed(context, '/login'),
+                      child: const Text(
+                        "Log in",
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),

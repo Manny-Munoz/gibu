@@ -40,13 +40,18 @@ class LoginPage extends StatelessWidget {
           const SizedBox(height: 9),
           const TextAlignmentLeft(text: "Forgot your password?", textSize: 18, textColor: Color.fromARGB(255, 37, 36, 39),),
           const SizedBox(height: 15,),
-          const Button(),
+          Button(onTap: () =>  Navigator.pushNamed(context, '/'),),
           const SizedBox(height: 40),
           const TextDivider(),
           const SizedBox(height: 30),
           const Row(mainAxisAlignment: MainAxisAlignment.center, children: [ImageCard(imagePath: "lib/images/facebook.png"), SizedBox(width:20), ImageCard(imagePath: "lib/images/google.png"), SizedBox(width: 20), ImageCard(imagePath: "lib/images/apple.png")],),
           const SizedBox(height: 70),
-          const Text("Don't have an account? Sing up", style: TextStyle(fontSize: 16),)
+          Row(
+            children: [
+              const Text("Don't have an account?", style: TextStyle(fontSize: 16),),
+              GestureDetector(onTap: () => Navigator.pushNamed(context, "/createAccountPage") , child: const Text("Sign up", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),)),
+            ],
+          )
         ]),
       )),
     );

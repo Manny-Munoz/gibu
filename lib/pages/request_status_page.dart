@@ -29,7 +29,7 @@ class RequestStatusPage extends StatelessWidget {
               const SizedBox(height: 20),
               Text(text),
               const SizedBox(height: 20),
-              Button(text: "Back to $path", textColor: Colors.white,)
+              Button(text: "Back to $path", textColor: Colors.white, onTap: () => Navigator.pushNamed(context, '/$path'),)
             ],
           ),
         )));

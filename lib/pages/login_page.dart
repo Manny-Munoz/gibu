@@ -18,8 +18,7 @@ class LoginPage extends StatelessWidget {
           child: Center(
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
-          child: Column(
-            children: [
+          child: Column(children: [
             const SizedBox(height: 25),
             Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 40.0),
@@ -34,25 +33,58 @@ class LoginPage extends StatelessWidget {
             const SizedBox(height: 15),
             const TextAlignmentLeft(text: "Email address"),
             const SizedBox(height: 9),
-            InputText(controller: emailController, hintText: "Your email", obscureText: false),
+            InputText(
+                controller: emailController,
+                hintText: "Your email",
+                obscureText: false),
             const SizedBox(height: 15),
             const TextAlignmentLeft(text: "Password"),
             const SizedBox(height: 9),
-            InputText(controller: passwordController, hintText: "Your password", obscureText: false),
+            InputText(
+                controller: passwordController,
+                hintText: "Your password",
+                obscureText: false),
             const SizedBox(height: 9),
-            const TextAlignmentLeft(text: "Forgot your password?", textSize: 18, textColor: Color.fromARGB(255, 37, 36, 39),),
-            const SizedBox(height: 15,),
-            Button(onTap: () =>  Navigator.pushNamed(context, '/'),),
+            const TextAlignmentLeft(
+              text: "Forgot your password?",
+              textSize: 18,
+              textColor: Color.fromARGB(255, 37, 36, 39),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Button(
+              onTap: () => Navigator.pushNamed(context, '/main'),
+            ),
             const SizedBox(height: 40),
             const TextDivider(),
             const SizedBox(height: 30),
-            const Row(mainAxisAlignment: MainAxisAlignment.center, children: [ImageCard(imagePath: "lib/images/facebook.png"), SizedBox(width:20), ImageCard(imagePath: "lib/images/google.png"), SizedBox(width: 20), ImageCard(imagePath: "lib/images/apple.png")],),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ImageCard(imagePath: "lib/images/facebook.png"),
+                SizedBox(width: 20),
+                ImageCard(imagePath: "lib/images/google.png"),
+                SizedBox(width: 20),
+                ImageCard(imagePath: "lib/images/apple.png")
+              ],
+            ),
             const SizedBox(height: 70),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text("Don't have an account?", style: TextStyle(fontSize: 16),),
-                GestureDetector(onTap: () => Navigator.pushNamed(context, "/createAccountPage") , child: const Text("Sign up", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),)),
+                const Text(
+                  "Don't have an account?",
+                  style: TextStyle(fontSize: 16),
+                ),
+                GestureDetector(
+                    onTap: () =>
+                        Navigator.pushNamed(context, "/createAccountPage"),
+                    child: const Text(
+                      "Sign up",
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    )),
               ],
             )
           ]),

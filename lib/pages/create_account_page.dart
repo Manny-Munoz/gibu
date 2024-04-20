@@ -60,7 +60,7 @@ class CreateAccountPage extends StatelessWidget {
                       text: "I accept the terms and privacy policy",
                       textSize: 15),
                   const SizedBox(height: 60),
-                  Button(onTap: () => Navigator.pushNamed(context, '/')),
+                  Button(onTap: () => Navigator.pushNamed(context, '/main')),
                   const SizedBox(height: 70),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

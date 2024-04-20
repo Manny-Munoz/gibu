@@ -51,7 +51,7 @@ class ChangePassword extends StatelessWidget {
                 hintText: "Confirm password",
                 obscureText: false),
             const SizedBox(height: 50),
-            const Button(text: "Change password"),
+            Button(text: "Change password", onTap: () => Navigator.pushNamed(context, '/login')),
           ],
         ))));
   }

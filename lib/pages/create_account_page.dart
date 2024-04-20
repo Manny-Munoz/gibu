@@ -62,7 +62,7 @@ class CreateAccountPage extends StatelessWidget {
                 const SizedBox(height: 70),
                 const Text(
                   "Already have an account?  Log in",
-                  style: TextStyle(fontSize: 17),
+                  style: TextStyle(fontSize: 16),
                 ),
               ],
             ),

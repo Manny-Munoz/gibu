@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
 
+enum Screens { Gibu, Saved, Settings }
+
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
 
@@ -23,29 +25,43 @@ class _MainPageState extends State<MainPage> {
           ),
         ),
       ),
+      appBar: AppBar(
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.white,
+          elevation: 0,
+          title: Text(
+            Screens.values[selectedIndex].name,
+            style: const TextStyle(
+                color: Color.fromARGB(255, 37, 36, 39),
+                fontSize: 20,
+                fontWeight: FontWeight.bold),
+          ),
+          actions: [
+            IconButton(
+              icon: Image.asset("lib/images/profile icon.png"),
+              onPressed: () {},
+            ),
+          ]),
       bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.shifting,
+          type: BottomNavigationBarType.fixed,
           currentIndex: selectedIndex,
           onTap: (int value) {
             setState(() => selectedIndex = value);
           },
           elevation: 0,
           items: [
-            const BottomNavigationBarItem(
-                backgroundColor: Colors.green,
-                icon: Icon(Icons.home),
-                activeIcon: Icon(Icons.home),
+            BottomNavigationBarItem(
+                icon: Image.asset("lib/images/home icon.png"),
+                activeIcon: Image.asset("lib/images/home icon active.png"),
                 label: "Home"),
-            const BottomNavigationBarItem(
-                backgroundColor: Colors.black,
-                icon: Icon(Icons.home),
-                activeIcon: Icon(Icons.home),
+            BottomNavigationBarItem(
+                icon: Image.asset("lib/images/saved icon.png"),
+                activeIcon: Image.asset("lib/images/saved icon active.png"),
                 label: "Saved"),
             BottomNavigationBarItem(
-                    backgroundColor: Colors.pink,
-                  icon: const Icon(Icons.home),
-                  activeIcon: Image.asset("lib/images/logo isotipo.png"),
-                  label: "Saved"),
+                icon: Image.asset("lib/images/settings icon.png"),
+                activeIcon: Image.asset("lib/images/settings icon active.png"),
+                label: "Saved"),
           ]),
     );
   }

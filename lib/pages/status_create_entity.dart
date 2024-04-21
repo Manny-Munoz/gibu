@@ -8,7 +8,7 @@ class StatusCreateEntity extends StatelessWidget {
       : "Password change failed";
   final String imagePath =
       true ? "lib/images/check.png" : "lib/images/check.png";
-  final String path = true ? "Home" : "Error Ocurred";
+  final String path = "home";
   final String title = true ? "Campaign Created" : "Error ocurred";
 
   @override

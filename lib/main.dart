@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gibu/pages/main_page.dart';
 import 'package:gibu/pages/welcome_page.dart';
 import 'package:gibu/pages/login_page.dart';
 import 'package:gibu/pages/create_account_page.dart';
@@ -13,7 +12,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: const WelcomePage(),
       routes: {

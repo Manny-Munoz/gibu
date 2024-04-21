@@ -1,6 +1,5 @@
 import "package:flutter/material.dart";
-
-enum Screens { Gibu, Saved, Settings }
+import "package:gibu/pages/home_page.dart";
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -11,26 +10,21 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int selectedIndex = 0;
+  final screenNames = ["Gibu", "Saved", "Settings"];
+
+  final screens = [HomePage(), HomePage(), HomePage()];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: const SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Text("Main Screen"),
-            ],
-          ),
-        ),
-      ),
+      body: IndexedStack(index: selectedIndex, children: screens),
       appBar: AppBar(
           automaticallyImplyLeading: false,
           backgroundColor: Colors.white,
           elevation: 0,
           title: Text(
-            Screens.values[selectedIndex].name,
+            screenNames[selectedIndex],
             style: const TextStyle(
                 color: Color.fromARGB(255, 37, 36, 39),
                 fontSize: 20,

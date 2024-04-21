@@ -28,8 +28,8 @@ class CampaingStructure extends StatelessWidget {
         child: Container(
             color: const Color.fromARGB(255, 240, 236, 236),
             child: SafeArea(
-                    child: SingleChildScrollView(
-                        child: Column(children: [
+                child: SingleChildScrollView(
+                    child: Column(children: [
               const SizedBox(height: 10),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 40.0),
@@ -90,7 +90,8 @@ class CampaingStructure extends StatelessWidget {
                 width: 350,
                 decoration: BoxDecoration(
                   border: Border.all(
-                      color: const Color.fromARGB(255, 182, 182, 182), width: 1),
+                      color: const Color.fromARGB(255, 182, 182, 182),
+                      width: 1),
                   borderRadius: BorderRadius.circular(15),
                   color: Colors.white,
                 ),

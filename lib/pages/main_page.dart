@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:gibu/pages/home_page.dart";
+import "package:gibu/pages/public_campaing.dart";
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -12,7 +13,7 @@ class _MainPageState extends State<MainPage> {
   int selectedIndex = 0;
   final screenNames = ["Gibu", "Saved", "Settings"];
 
-  final screens = [HomePage(), HomePage(), HomePage()];
+  final screens = [HomePage(), PublicCampaing(), HomePage()];
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +56,7 @@ class _MainPageState extends State<MainPage> {
             BottomNavigationBarItem(
                 icon: Image.asset("lib/images/settings icon.png"),
                 activeIcon: Image.asset("lib/images/settings icon active.png"),
-                label: "Saved"),
+                label: "Settings"),
           ]),
     );
   }

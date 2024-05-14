@@ -4,6 +4,13 @@ Built using Flutter and powered by Firebase, Gibu offers a seamless and intuitiv
 
 ## Screenshots
 
+Welcome page | Login Page               | Signup Page               |  
+:-------------------------:|:-------------------------:|:-------------------------:
+![](./screenshots/sign%20up%20page.jpeg)|![](./screenshots/login%20page.jpeg)|![](./screenshots/welcome%20page.jpeg)|
+Saved Campaigns | Home Page               |
+![](./screenshots/saved%20campaigns%20section.jpeg)| ![Home Page](./screenshots/home%20page%20section.jpeg) |
+
+
 ## Directory Structure
 
 ```

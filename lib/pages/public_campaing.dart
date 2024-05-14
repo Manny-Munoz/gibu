@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gibu/components/campaing_structure.dart';
 
 class PublicCampaing extends StatelessWidget {
-  PublicCampaing({super.key});
+  const PublicCampaing({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -54,17 +54,17 @@ class CampaingStructure extends StatelessWidget {
                       children: [
                         Row(
                           children: [
+                            const SizedBox(width: 3),
                             Image.asset(heroPath),
                             const SizedBox(width: 8),
-                            Text(
-                                "$fundraiserName is organizing this fundraiser",
-                                style: const TextStyle(
-                                    fontSize: 9,
-                                    color: Color.fromARGB(255, 104, 104, 104))),
-                            const SizedBox(width: 2),
+                             Text(
+                                    "$fundraiserName is organizing this fundraiser",
+                                    style: const TextStyle(
+                                        fontSize: 10,
+                                        color: Color.fromARGB(255, 104, 104, 104))),
                           ],
                         ),
-                        const Tag()
+                        const Tag() 
                       ])),
               const SizedBox(height: 8),
               Image.asset("lib/images/bar.png"),

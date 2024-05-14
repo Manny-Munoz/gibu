@@ -2,12 +2,34 @@ import "package:flutter/material.dart";
 import 'package:gibu/components/input_text.dart';
 import 'package:gibu/components/text_alignment_left.dart';
 import 'package:gibu/components/button.dart';
+import 'package:flutter/services.dart';
 
-class CreateAccountPage extends StatelessWidget {
-  CreateAccountPage({super.key});
+class CreateAccountPage extends StatefulWidget {
+  const CreateAccountPage({super.key});
+
+  @override
+  State<CreateAccountPage> createState() => _CreateAccountPageState();
+}
+
+class _CreateAccountPageState extends State<CreateAccountPage> {
+  bool _isChecked = false;
+
   final usernameController = TextEditingController();
+
   final passwordController = TextEditingController();
+
   final emailConstroller = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,9 +78,25 @@ class CreateAccountPage extends StatelessWidget {
                       hintText: "your password",
                       obscureText: false),
                   const SizedBox(height: 15),
-                  const TextAlignmentLeft(
-                      text: "I accept the terms and privacy policy",
-                      textSize: 15),
+                  Theme(
+                    data: ThemeData(
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                    ),
+                    child: CheckboxListTile(
+                      title: const Text(
+                        'I accept the terms and privacy policy',
+                      ),
+                      value: _isChecked,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          _isChecked = value ?? false;
+                        });
+                      },
+                      controlAffinity: ListTileControlAffinity.leading,
+                      activeColor: const Color.fromARGB(255, 58, 170, 129),
+                    ),
+                  ),
                   const SizedBox(height: 60),
                   Button(onTap: () => Navigator.pushNamed(context, '/main')),
                   const SizedBox(height: 70),

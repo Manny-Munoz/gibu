@@ -28,7 +28,7 @@ class _MainPageState extends State<MainPage> {
             screenNames[selectedIndex],
             style: const TextStyle(
                 color: Color.fromARGB(255, 37, 36, 39),
-                fontSize: 20,
+                fontSize: 30,
                 fontWeight: FontWeight.bold),
           ),
           actions: [

@@ -6,8 +6,9 @@ final String text;
   final Color buttonColor;
   final double tagWidth;
   final double tagHeight;
+  final double textSize;
 
-  const Tag ({super.key, this.text = "Medical", this.tagHeight=35, this.tagWidth=85, this.textColor = Colors.white, this.buttonColor = const Color.fromARGB(255, 23, 77, 77)});
+  const Tag ({super.key, this.text = "Medical", this.tagHeight=35, this.tagWidth=85, this.textSize=11, this.textColor = Colors.white, this.buttonColor = const Color.fromARGB(255, 23, 77, 77)});
 
 @override
 Widget build(BuildContext context){
@@ -23,7 +24,7 @@ Widget build(BuildContext context){
           text,
           style: TextStyle(
             color:  textColor,
-            fontSize: 11,
+            fontSize: textSize,
           ),
         ),
       ),

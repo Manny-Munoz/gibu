@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:gibu/components/campaign_preview.dart";
 import "package:gibu/components/input_text.dart";
 import "package:gibu/components/text_alignment_left.dart";
 import "package:gibu/components/social_media_button.dart";
@@ -38,8 +39,8 @@ class HomePage extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   image: const DecorationImage(
-                    image: AssetImage(
-                        "lib/images/create campaign background.png"),
+                    image:
+                        AssetImage("lib/images/create campaign background.png"),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -137,18 +138,49 @@ class HomePage extends StatelessWidget {
                 ),
               ]),
               const SizedBox(height: 25),
-              const CampaingStructure(
-                campaingTitle:
-                    "Bring Lauren home: Fund for Med-Flight & recovery hello how are",
-                imagePath: "lib/images/Lauren.png",
-                heroPath: "lib/images/profile.png",
-                fundraiserName: "Monika Islam",
-                raised: "131,234.00",
-                goal: "250,000.00",
-                raisedPercentage: "100",
-                description:
-                    "Today I reach out to you with a heavy heart, asking for your help during an unimaginably difficult time for a family very near and dear to me.",
-              )
+              const Padding(
+                  padding: EdgeInsets.all(20.0),
+                  child: Center(
+                    child: Column(
+                      children: [
+                        CampaignPreview(
+                          campaingTitlePreview:
+                              "Bring Lauren home: Fund for Med-Flight & recovery hello how are",
+                          imagePathPreview: "lib/images/Lauren.png",
+                          heroPathPreview: "lib/images/profile.png",
+                          fundraiserNamePreview: "Monika Islam",
+                          raisedPreview: 131234.00,
+                          goalPreview: 250000.00,
+                          descriptionPreview:
+                              "Today I reach out to you with a heavy heart, asking for your help during an unimaginably difficult time for a family very near and dear to me. Today I reach out to you with a heavy heart, asking for your help during an unimaginably difficult time for a family very near and dear to me. Today I reach out to you with a heavy heart, asking for your help during an unimaginably difficult time for a family very near and dear to me.",
+                        ),
+                        SizedBox(height: 20),
+                        CampaignPreview(
+                          campaingTitlePreview:
+                              "Bring Lauren home: Fund for Med-Flight & recovery hello how are",
+                          imagePathPreview: "lib/images/Lauren.png",
+                          heroPathPreview: "lib/images/profile.png",
+                          fundraiserNamePreview: "Monika Islam",
+                          raisedPreview: 5000.00,
+                          goalPreview: 250000.00,
+                          descriptionPreview:
+                              "Today I reach out to you with a heavy heart, asking for your help during an unimaginably difficult time for a family very near and dear to me. Today I reach out to you with a heavy heart, asking for your help during an unimaginably difficult time for a family very near and dear to me. Today I reach out to you with a heavy heart, asking for your help during an unimaginably difficult time for a family very near and dear to me.",
+                        ),
+                        SizedBox(height: 20),
+                        CampaignPreview(
+                          campaingTitlePreview:
+                              "Bring Lauren home: Fund for Med-Flight & recovery hello how are",
+                          imagePathPreview: "lib/images/Lauren.png",
+                          heroPathPreview: "lib/images/profile.png",
+                          fundraiserNamePreview: "Monika Islam",
+                          raisedPreview: 400000.00,
+                          goalPreview: 250000.00,
+                          descriptionPreview:
+                              "Today I reach out to you with a heavy heart, asking for your help during an unimaginably difficult time for a family very near and dear to me. Today I reach out to you with a heavy heart, asking for your help during an unimaginably difficult time for a family very near and dear to me. Today I reach out to you with a heavy heart, asking for your help during an unimaginably difficult time for a family very near and dear to me.",
+                        ),
+                      ],
+                    ),
+                  )),
             ],
           ),
         ),

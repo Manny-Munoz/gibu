@@ -4,12 +4,16 @@ class InputText extends StatelessWidget {
   final controller;
   final String hintText;
   final bool obscureText;
+  final int max;
+  final int min;
 
   const InputText({
     super.key,
     required this.controller,
     required this.hintText,
     required this.obscureText,
+    this.max=1,
+    this.min=1,
   });
 
   @override
@@ -19,9 +23,12 @@ class InputText extends StatelessWidget {
       child: TextField(
         controller: controller,
         obscureText: obscureText,
+        minLines: min,
+        maxLines: max,
         decoration: InputDecoration(
             enabledBorder: const OutlineInputBorder(
               borderSide: BorderSide(color: Colors.white),
+              borderRadius: BorderRadius.all(Radius.circular(10)),
             ),
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: Colors.grey.shade400),

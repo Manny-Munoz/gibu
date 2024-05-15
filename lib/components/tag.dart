@@ -4,14 +4,17 @@ class Tag extends StatelessWidget{
 final String text;
   final Color textColor;
   final Color buttonColor;
+  final double tagWidth;
+  final double tagHeight;
+  final double textSize;
 
-  const Tag ({super.key, this.text = "Medical", this.textColor = Colors.white, this.buttonColor = const Color.fromARGB(255, 23, 77, 77)});
+  const Tag ({super.key, this.text = "Medical", this.tagHeight=35, this.tagWidth=85, this.textSize=11, this.textColor = Colors.white, this.buttonColor = const Color.fromARGB(255, 23, 77, 77)});
 
 @override
 Widget build(BuildContext context){
   return Container(
-    width: 85,
-      height: 45,
+    width: tagWidth,
+      height: tagHeight,
       decoration: BoxDecoration(
         color: buttonColor,
         borderRadius: BorderRadius.circular(10),
@@ -21,7 +24,7 @@ Widget build(BuildContext context){
           text,
           style: TextStyle(
             color:  textColor,
-            fontSize: 10,
+            fontSize: textSize,
           ),
         ),
       ),

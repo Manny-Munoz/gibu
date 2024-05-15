@@ -13,7 +13,7 @@ class _MainPageState extends State<MainPage> {
   int selectedIndex = 0;
   final screenNames = ["Gibu", "Saved", "Settings"];
 
-  final screens = [HomePage(), PublicCampaing(), HomePage()];
+  final screens = [HomePage(), const PublicCampaing(), HomePage()];
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,9 @@ class _MainPageState extends State<MainPage> {
           actions: [
             IconButton(
               icon: Image.asset("lib/images/profile icon.png"),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, "/profile");
+              },
             ),
           ]),
       bottomNavigationBar: BottomNavigationBar(

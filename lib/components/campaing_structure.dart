@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:gibu/components/tag.dart';
+import 'package:gibu/components/progress_bar.dart';
 
 class CampaingStructure extends StatelessWidget {
   final String campaingTitle;
   final String imagePath;
   final String heroPath;
   final String fundraiserName;
-  final String raised;
-  final String goal;
-  final String raisedPercentage;
+  final double raised;
+  final double goal;
   final String description;
   const CampaingStructure({
     super.key,
@@ -18,7 +18,6 @@ class CampaingStructure extends StatelessWidget {
     required this.fundraiserName,
     required this.raised,
     required this.goal,
-    required this.raisedPercentage,
     required this.description,
   });
 
@@ -67,7 +66,7 @@ class CampaingStructure extends StatelessWidget {
                         const Tag() 
                       ])),
               const SizedBox(height: 8),
-              Image.asset("lib/images/bar.png"),
+              ProgressBar(goal: goal, raised: raised),
               const SizedBox(height: 8),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 23.0),
@@ -81,7 +80,6 @@ class CampaingStructure extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Text("$raisedPercentage%"),
                   ],
                 ),
               ),

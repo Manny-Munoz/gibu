@@ -137,9 +137,8 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               ]),
-              const SizedBox(height: 25),
               const Padding(
-                  padding: EdgeInsets.all(20.0),
+                  padding: EdgeInsets.all(10.0),
                   child: Center(
                     child: Column(
                       children: [
@@ -154,7 +153,6 @@ class HomePage extends StatelessWidget {
                           descriptionPreview:
                               "Today I reach out to you with a heavy heart, asking for your help during an unimaginably difficult time for a family very near and dear to me. Today I reach out to you with a heavy heart, asking for your help during an unimaginably difficult time for a family very near and dear to me. Today I reach out to you with a heavy heart, asking for your help during an unimaginably difficult time for a family very near and dear to me.",
                         ),
-                        SizedBox(height: 20),
                         CampaignPreview(
                           campaingTitlePreview:
                               "Bring Lauren home: Fund for Med-Flight & recovery hello how are",
@@ -166,7 +164,6 @@ class HomePage extends StatelessWidget {
                           descriptionPreview:
                               "Today I reach out to you with a heavy heart, asking for your help during an unimaginably difficult time for a family very near and dear to me. Today I reach out to you with a heavy heart, asking for your help during an unimaginably difficult time for a family very near and dear to me. Today I reach out to you with a heavy heart, asking for your help during an unimaginably difficult time for a family very near and dear to me.",
                         ),
-                        SizedBox(height: 20),
                         CampaignPreview(
                           campaingTitlePreview:
                               "Bring Lauren home: Fund for Med-Flight & recovery hello how are",

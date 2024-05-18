@@ -3,7 +3,7 @@ import "package:gibu/components/campaing_structure.dart";
 import 'package:gibu/components/progress_bar.dart';
 import 'package:gibu/components/double_to_currency.dart';
 
-class CampaignPreview extends StatelessWidget {
+class CampaignPreview extends StatefulWidget {
   final String campaingTitlePreview;
   final String imagePathPreview;
   final String heroPathPreview;
@@ -23,10 +23,17 @@ class CampaignPreview extends StatelessWidget {
     required this.descriptionPreview,
   });
 
+  @override
+  State<CampaignPreview> createState() => _CampaignPreviewState();
+}
+
+class _CampaignPreviewState extends State<CampaignPreview> {
+  bool _isFavorite = false;
+
   Widget textShortener() {
-    String text = (descriptionPreview.length >= 100)
-        ? descriptionPreview.substring(0, 100)
-        : descriptionPreview;
+    String text = (widget.descriptionPreview.length >= 100)
+        ? widget.descriptionPreview.substring(0, 100)
+        : widget.descriptionPreview;
     return RichText(
       text: TextSpan(
         style: const TextStyle(
@@ -52,22 +59,23 @@ class CampaignPreview extends StatelessWidget {
             context,
             MaterialPageRoute(
                 builder: (context) => CampaingStructure(
-                      campaingTitle: campaingTitlePreview,
-                      imagePath: imagePathPreview,
-                      heroPath: heroPathPreview,
-                      fundraiserName: fundraiserNamePreview,
-                      raised: raisedPreview,
-                      goal: goalPreview,
-                      description: descriptionPreview,
+                      campaingTitle: widget.campaingTitlePreview,
+                      imagePath: widget.imagePathPreview,
+                      heroPath: widget.heroPathPreview,
+                      fundraiserName: widget.fundraiserNamePreview,
+                      raised: widget.raisedPreview,
+                      goal: widget.goalPreview,
+                      description: widget.descriptionPreview,
                     )));
       },
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
-        padding: const EdgeInsets.only(left:10, right:10, top:15, bottom:15),
-  decoration: BoxDecoration(
-    borderRadius: BorderRadius.circular(10.0), // Add border radius here
-        color: const Color.fromARGB(255, 240, 236, 236),
-  ),
+        padding:
+            const EdgeInsets.only(left: 10, right: 10, top: 15, bottom: 15),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10.0), // Add border radius here
+          color: const Color.fromARGB(255, 240, 236, 236),
+        ),
         child: Column(
           children: [
             Row(
@@ -86,20 +94,45 @@ class CampaignPreview extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        campaingTitlePreview,
-                        style: const TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold),
+                      Row(
+                        children: [
+                          Flexible(
+                            child: Text(
+                              widget.campaingTitlePreview,
+                              style: const TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    _isFavorite = !_isFavorite;
+                                  });
+                                },
+                                child: Image.asset(_isFavorite
+                                    ? "lib/images/heart-circle.png"
+                                    : "lib/images/heart-circle-favorite.png"),
+                              ),
+                            ],
+                          ),                        
+                        ],
                       ),
                       const SizedBox(height: 5),
                       Column(
                         children: [
-                          ProgressBar(goal: goalPreview, raised: raisedPreview),
+                          ProgressBar(
+                              goal: widget.goalPreview,
+                              raised: widget.raisedPreview),
                           const SizedBox(height: 8),
                           Row(children: [
                             Flexible(
                               child: Text(
-                                "Raised: ${doubleToCurrency(raisedPreview)} of ${doubleToCurrency(goalPreview)} goal", style: const TextStyle(fontWeight: FontWeight.bold),
+                                "Raised: ${doubleToCurrency(widget.raisedPreview)} of ${doubleToCurrency(widget.goalPreview)} goal",
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold),
                               ),
                             ),
                           ])

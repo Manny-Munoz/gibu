@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import "package:gibu/pages/home_page.dart";
 import "package:gibu/pages/public_campaing.dart";
+import "package:gibu/pages/settings_page.dart";
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -13,7 +14,7 @@ class _MainPageState extends State<MainPage> {
   int selectedIndex = 0;
   final screenNames = ["Gibu", "Saved", "Settings"];
 
-  final screens = [HomePage(), const PublicCampaing(), HomePage()];
+  final screens = [HomePage(), const PublicCampaing(), const SettingsPage()];
 
   @override
   Widget build(BuildContext context) {

@@ -3,7 +3,6 @@ import "package:gibu/components/campaign_preview.dart";
 import "package:gibu/components/input_text.dart";
 import "package:gibu/components/text_alignment_left.dart";
 import "package:gibu/components/social_media_button.dart";
-import "package:gibu/components/campaing_structure.dart";
 
 class HomePage extends StatelessWidget {
   final name = "Monika";
@@ -65,7 +64,7 @@ class HomePage extends StatelessWidget {
                         )),
                         const SizedBox(height: 10),
                         GestureDetector(
-                          onTap: () => Navigator.pushNamed(context, '/main'),
+                          onTap: () => Navigator.pushNamed(context, '/startCampaign'),
                           child: Container(
                             width: 150,
                             height: 50,

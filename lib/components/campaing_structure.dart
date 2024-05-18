@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gibu/components/double_to_currency.dart';
 import 'package:gibu/components/tag.dart';
 import 'package:gibu/components/progress_bar.dart';
 
@@ -56,30 +57,35 @@ class CampaingStructure extends StatelessWidget {
                             const SizedBox(width: 3),
                             Image.asset(heroPath),
                             const SizedBox(width: 8),
-                             Text(
-                                    "$fundraiserName is organizing this fundraiser",
-                                    style: const TextStyle(
-                                        fontSize: 10,
-                                        color: Color.fromARGB(255, 104, 104, 104))),
+                            Text(
+                                "$fundraiserName is organizing this fundraiser",
+                                style: const TextStyle(
+                                    fontSize: 10,
+                                    color: Color.fromARGB(255, 104, 104, 104))),
                           ],
                         ),
-                        const Tag() 
+                        const Tag()
                       ])),
               const SizedBox(height: 8),
-              ProgressBar(goal: goal, raised: raised),
-              const SizedBox(height: 8),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 23.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                padding: const EdgeInsets.only(
+                    right: 32.0, left: 32.0, top: 10.0, bottom: 10.0),
+                child: Column(
                   children: [
+                    ProgressBar(goal: goal, raised: raised),
+                    const SizedBox(height: 8),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          "Raised: $raised of $goal goal",
+                        Row(
+                          children: [
+                            Text(
+                              "Raised: ${doubleToCurrency(raised)} of ${doubleToCurrency(goal)} goal",
+                            ),
+                          ],
                         ),
                       ],
-                    ),
+                    )
                   ],
                 ),
               ),

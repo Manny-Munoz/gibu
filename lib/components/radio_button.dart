@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 var ischecked = [true, false, false];
 
 class MyRadioButton extends StatefulWidget {
-  const MyRadioButton({Key? key}) : super(key: key);
+  const MyRadioButton({super.key}) ;
 
   @override
   State<MyRadioButton> createState() => _MyRadioButtonState();
@@ -134,7 +134,7 @@ class _MyRadioButtonState extends State<MyRadioButton> {
             },
             child: Container(
               decoration: BoxDecoration(
-                color: ischecked[2]?const Color.fromARGB(255, 23, 77, 77):Color.fromARGB(255, 255, 255, 255),
+                color: ischecked[2]?const Color.fromARGB(255, 23, 77, 77):const Color.fromARGB(255, 255, 255, 255),
                 borderRadius: BorderRadius.circular(15),
                 border: Border.all(
                   color: const Color.fromARGB(255, 216, 218, 220),

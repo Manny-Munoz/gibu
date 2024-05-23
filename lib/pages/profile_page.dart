@@ -267,9 +267,12 @@ class _ProfileState extends State<Profile> {
                 const CompleteDivider(),
                 const SizedBox(height: 180),
                 const Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [        
-                    SizedBox(width: 310),    
-                    LogoutButton(),
+                    Padding(
+                      padding: EdgeInsets.only(right: 20.0),
+                      child: LogoutButton(),
+                    ),
                   ],
                 ),
                 const SizedBox(height: 20),

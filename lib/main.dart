@@ -3,9 +3,7 @@ import 'package:gibu/pages/donation_form.dart';
 import 'package:gibu/pages/start_campaign_page.dart';
 import 'package:gibu/pages/main_page.dart';
 import 'package:gibu/pages/fill_out_campaign.dart';
-import 'package:gibu/pages/welcome_page.dart';
 import 'package:gibu/pages/login_page.dart';
-import 'package:gibu/pages/create_account_page.dart';
 import 'package:gibu/pages/profile_page.dart';
 import 'firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -34,6 +32,7 @@ class MyApp extends StatelessWidget {
         '/startCampaign': (context) => const StartCampaignPage(),
         '/fillOutCampaign': (context) => FillOutCampaign(),
         '/donationForm': (context) => const DonationForm(),
+        '/auth': (context) => const AuthPage(),    
       },
     );
   }

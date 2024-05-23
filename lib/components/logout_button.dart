@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LogoutButton extends StatelessWidget{
   const LogoutButton({super.key});
+
+  void signOut(context){
+    FirebaseAuth.instance.signOut();
+    Navigator.pushNamed(context, '/auth');
+  }
 
   @override
   Widget build(BuildContext context){
@@ -18,7 +24,7 @@ class LogoutButton extends StatelessWidget{
               child: const Text('Cancel', style: TextStyle(color: Color.fromARGB(255, 23, 77, 77))),
             ),
             TextButton(
-              onPressed: () => Navigator.pop(context, 'Logout'),
+              onPressed: ()=> signOut(context),
               child: const Text('Logout', style: TextStyle (color: Color.fromARGB(255, 23, 77, 77))),
             ),
           ],
@@ -32,5 +38,4 @@ class LogoutButton extends StatelessWidget{
       backgroundColor: const Color.fromARGB(255, 23, 77, 77),
       child: const Icon(Icons.logout_rounded, color: Colors.white,),);
   }
-
 }

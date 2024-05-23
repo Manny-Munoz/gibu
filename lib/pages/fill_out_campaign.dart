@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gibu/components/input_text.dart';
 import 'package:gibu/components/tag.dart';
 
-class StepTwoCampaing extends StatelessWidget {
-  StepTwoCampaing({super.key});
+class FillOutCampaign extends StatelessWidget {
+  FillOutCampaign({super.key});
   final beneficiaryController = TextEditingController();
   final contactController = TextEditingController();
   final ageController = TextEditingController();
@@ -15,7 +15,7 @@ class StepTwoCampaing extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
       ),        
       body: Container(
         color: Colors.white,

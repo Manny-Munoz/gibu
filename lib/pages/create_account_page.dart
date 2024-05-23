@@ -78,7 +78,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                   InputText(
                       controller: passwordController,
                       hintText: "your password",
-                      obscureText: false),
+                      obscureText: true),
                   const SizedBox(height: 15),
                   Theme(
                     data: ThemeData(

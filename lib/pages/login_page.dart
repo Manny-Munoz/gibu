@@ -70,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
             InputText(
                 controller: passwordController,
                 hintText: "Your password",
-                obscureText: false),
+                obscureText: true),
             const SizedBox(height: 9),
             const TextAlignmentLeft(
               text: "Forgot your password?",

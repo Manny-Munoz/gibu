@@ -74,7 +74,7 @@ class _CampaignPreviewState extends State<CampaignPreview> {
             const EdgeInsets.only(left: 10, right: 10, top: 15, bottom: 15),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.0), // Add border radius here
-          color: const Color.fromARGB(255, 240, 236, 236),
+          color: const Color.fromARGB(223, 235, 233, 233),
         ),
         child: Column(
           children: [

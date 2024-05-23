@@ -85,7 +85,7 @@ class _CampaignPreviewState extends State<CampaignPreview> {
                   width: 100.0,
                   height: 100.0,
                   child: Image.asset(
-                    "lib/images/Lauren.png",
+                    widget.imagePathPreview,
                     fit: BoxFit.cover,
                   ),
                 ),

@@ -3,9 +3,8 @@ import "package:gibu/pages/request_status_page.dart";
 
 class StatusCreateEntity extends StatelessWidget {
   const StatusCreateEntity({super.key});
-  final String text = true
-      ? "Your campaign has been created succesfully.\n our team will review it and get back to you shortly."
-      : "Password change failed";
+  // Insert a message for the user when the entity is created successfully for example "Your campaign has been created succesfully.\n our team will review it and get back to you shortly."
+  final String text = true ? "Campaign created successfully" : "Password change failed";
   final String imagePath =
       true ? "lib/images/check.png" : "lib/images/check.png";
   final String path = "home";

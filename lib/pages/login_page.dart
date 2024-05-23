@@ -5,9 +5,12 @@ import "package:gibu/components/social_media_button.dart";
 import "package:gibu/components/text_alignment_left.dart";
 import "package:gibu/components/button.dart";
 import 'package:flutter/services.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  final Function()? onTap;
+
+  const LoginPage({super.key, this.onTap});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -17,6 +20,11 @@ class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
 
   final passwordController = TextEditingController();
+
+  void logUserIn() async {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text, password: passwordController.text);
+  }
 
   @override
   void initState() {
@@ -73,7 +81,7 @@ class _LoginPageState extends State<LoginPage> {
               height: 15,
             ),
             Button(
-              onTap: () => Navigator.pushNamed(context, '/main'),
+              onTap: () => logUserIn(),
             ),
             const SizedBox(height: 40),
             const TextDivider(),
@@ -97,8 +105,7 @@ class _LoginPageState extends State<LoginPage> {
                   style: TextStyle(fontSize: 16),
                 ),
                 GestureDetector(
-                    onTap: () =>
-                        Navigator.pushNamed(context, "/createAccountPage"),
+                    onTap: widget.onTap,
                     child: const Text(
                       "Sign up",
                       style:

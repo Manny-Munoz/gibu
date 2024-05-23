@@ -5,7 +5,9 @@ import 'package:gibu/components/button.dart';
 import 'package:flutter/services.dart';
 
 class CreateAccountPage extends StatefulWidget {
-  const CreateAccountPage({super.key});
+  final Function()? onTap;
+
+  const CreateAccountPage({super.key , required this.onTap});
 
   @override
   State<CreateAccountPage> createState() => _CreateAccountPageState();
@@ -108,7 +110,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                         style: TextStyle(fontSize: 16),
                       ),
                       GestureDetector(
-                        onTap: () => Navigator.pushNamed(context, '/login'),
+                        onTap: widget.onTap,
                         child: const Text(
                           "Log in",
                           style: TextStyle(

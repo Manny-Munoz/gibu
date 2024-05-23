@@ -4,7 +4,11 @@ import "package:gibu/components/button.dart";
 import 'package:flutter/services.dart';
 
 class WelcomePage extends StatefulWidget {
-  const WelcomePage({super.key});
+  final VoidCallback onLoginTap;
+  final VoidCallback onRegisterTap;
+
+
+  const WelcomePage({super.key, required this.onLoginTap, required this.onRegisterTap });
 
   @override
   State<WelcomePage> createState() => _WelcomePageState();
@@ -48,9 +52,9 @@ class _WelcomePageState extends State<WelcomePage> {
               text: "Create Account",
               buttonColor: Colors.white,
               textColor: const Color.fromARGB(255, 23, 77, 77),
-              onTap: () => Navigator.pushNamed(context, '/createAccountPage')),
+      onTap: widget.onLoginTap,),
           const SizedBox(height: 20),
-          Button(onTap: () => Navigator.pushNamed(context, '/login')),
+          Button(onTap: widget.onRegisterTap),
           const SizedBox(height: 20),
         ])),
       ),

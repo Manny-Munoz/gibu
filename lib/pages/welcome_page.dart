@@ -7,8 +7,8 @@ class WelcomePage extends StatefulWidget {
   final VoidCallback onLoginTap;
   final VoidCallback onRegisterTap;
 
-
-  const WelcomePage({super.key, required this.onLoginTap, required this.onRegisterTap });
+  const WelcomePage(
+      {super.key, required this.onLoginTap, required this.onRegisterTap});
 
   @override
   State<WelcomePage> createState() => _WelcomePageState();
@@ -49,10 +49,11 @@ class _WelcomePageState extends State<WelcomePage> {
               text: "Together we can change our society", textSize: 15),
           const SizedBox(height: 30),
           Button(
-              text: "Create Account",
-              buttonColor: Colors.white,
-              textColor: const Color.fromARGB(255, 23, 77, 77),
-      onTap: widget.onRegisterTap,),
+            text: "Create Account",
+            buttonColor: Colors.white,
+            textColor: const Color.fromARGB(255, 23, 77, 77),
+            onTap: widget.onRegisterTap,
+          ),
           const SizedBox(height: 20),
           Button(onTap: widget.onLoginTap),
           const SizedBox(height: 20),

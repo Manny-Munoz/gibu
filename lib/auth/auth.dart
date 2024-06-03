@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gibu/pages/main_page.dart';
-import 'package:gibu/pages/welcome_page.dart';
 import 'package:gibu/auth/login_or_register.dart';
 
 class AuthPage extends StatelessWidget {

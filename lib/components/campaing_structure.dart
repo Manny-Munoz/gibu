@@ -3,6 +3,8 @@ import 'package:gibu/components/double_to_currency.dart';
 import 'package:gibu/components/tag.dart';
 import 'package:gibu/components/progress_bar.dart';
 import 'package:gibu/components/button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CampaingStructure extends StatefulWidget {
   final String campaingTitle;
@@ -12,6 +14,10 @@ class CampaingStructure extends StatefulWidget {
   final double raised;
   final double goal;
   final String description;
+  final String campaignId;
+  final List<String> likes;
+  final String type;
+
   const CampaingStructure({
     super.key,
     required this.campaingTitle,
@@ -21,6 +27,9 @@ class CampaingStructure extends StatefulWidget {
     required this.raised,
     required this.goal,
     required this.description,
+    required this.likes,
+    required this.campaignId,
+    required this.type,
   });
 
   @override
@@ -28,7 +37,15 @@ class CampaingStructure extends StatefulWidget {
 }
 
 class _CampaingStructureState extends State<CampaingStructure> {
-  bool _isFavorite = false;
+  bool isLiked = false;
+
+  final currentUser = FirebaseAuth.instance.currentUser;
+
+  @override
+  void initState() {
+    super.initState();
+    isLiked = widget.likes.contains(currentUser!.uid);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,25 +78,42 @@ class _CampaingStructureState extends State<CampaingStructure> {
                         InkWell(
                           onTap: () {
                             setState(() {
-                              _isFavorite = !_isFavorite;
+                              isLiked = !isLiked;
+
+                              DocumentReference campaign = FirebaseFirestore
+                                  .instance
+                                  .collection("campaigns")
+                                  .doc(widget.campaignId);
+
+                              if (isLiked) {
+                                campaign.update({
+                                  'likes':
+                                      FieldValue.arrayUnion([currentUser!.uid])
+                                });
+                              } else {
+                                campaign.update({
+                                  'likes':
+                                      FieldValue.arrayRemove([currentUser!.uid])
+                                });
+                              }
                             });
                           },
-                          child: Image.asset(_isFavorite
-                              ? "lib/images/heart-circle.png"
-                              : "lib/images/heart-circle-favorite.png"),
+                          child: Image.asset(isLiked
+                              ? "lib/images/heart-circle-favorite.png"
+                              : "lib/images/heart-circle.png"),
                         ),
                       ],
                     ),
                   ],
                 ),
                 const SizedBox(height: 10),
-                Image.asset(widget.imagePath),
+                Image.network(widget.imagePath),
                 const SizedBox(height: 8),
-                const Row(
+                Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Flexible(child: Text("2 people just donated")),
-                      Tag()
+                      const Flexible(child: Text("2 people just donated")),
+                      Tag(text: widget.type)
                     ]),
                 const SizedBox(height: 8),
                 Column(
@@ -147,9 +181,11 @@ class _CampaingStructureState extends State<CampaingStructure> {
                     context,
                     '/donationForm',
                     arguments: {
-                      'campaingTitle': widget.campaingTitle,
+                      'campaignTitle': widget.campaingTitle,
                       'fundraiserName': widget.fundraiserName,
-                      'heroPath': widget.imagePath
+                      'heroPath': widget.imagePath,
+                      "campaignId": widget.campaignId,
+                      "raised": widget.raised
                     },
                   ),
                 ),

@@ -4,7 +4,7 @@ import "package:gibu/pages/create_account_page.dart";
 import "package:gibu/pages/login_page.dart";
 
 class LogInOrRegister extends StatefulWidget {
-  const LogInOrRegister({Key? key}) : super(key: key);
+  const LogInOrRegister({super.key});
 
   @override
   State<LogInOrRegister> createState() => _LogInOrRegisterState();

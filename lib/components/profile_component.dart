@@ -17,7 +17,14 @@ class ProfileStrcture extends StatelessWidget {
       child: Column(
         children: [
           const SizedBox(height: 10),
-          Image.asset(imageProfile),
+          CircleAvatar(
+            radius: 60,
+            backgroundImage:
+                imageProfile != "" ? NetworkImage(imageProfile) : null,
+            child: imageProfile == ""
+                ? const Icon(Icons.account_circle, size: 100)
+                : null,
+          ),
           const SizedBox(height: 5),
           Text(username, style: const TextStyle(fontSize: 28)),
           Text(email,

@@ -13,6 +13,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int selectedIndex = 0;
   final screenNames = ["Gibu", "Saved", "Settings"];
+  final pageController = PageController();
 
   final screens = [HomePage(), const PublicCampaing(), const SettingsPage()];
 
@@ -20,7 +21,13 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: IndexedStack(index: selectedIndex, children: screens),
+      body: PageView(
+        controller: pageController,
+        onPageChanged: (index) {
+          setState(() => selectedIndex = index);
+        },
+        children: screens,
+      ), 
       appBar: AppBar(
           automaticallyImplyLeading: false,
           backgroundColor: Colors.white,
@@ -45,6 +52,7 @@ class _MainPageState extends State<MainPage> {
           currentIndex: selectedIndex,
           onTap: (int value) {
             setState(() => selectedIndex = value);
+            pageController.jumpToPage(value);
           },
           elevation: 0,
           items: [

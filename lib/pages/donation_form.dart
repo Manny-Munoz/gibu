@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:gibu/components/squared_radio_button.dart';
+import 'package:gibu/components/button.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import "package:firebase_auth/firebase_auth.dart";
 
 class DonationForm extends StatefulWidget {
   const DonationForm({super.key});
@@ -14,6 +16,29 @@ class _DonationForm extends State<DonationForm> {
   int _selectedMonth = 1;
   bool _isChecked = false;
   final TextEditingController _controller = TextEditingController();
+
+  createContribution({campaignName, campaignId, raisedMoney}) async {
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser?.uid)
+        .update({
+      'contributions': FieldValue.arrayUnion([
+        {
+          'campaignName': campaignName,
+          'campaignId': campaignName,
+          'monthsLeft': _selectedMonth - 1,
+        },
+      ]),
+    });
+
+    FirebaseFirestore.instance.collection('campaigns').doc(campaignId).update({
+      'raised': raisedMoney + _selectedAmount,
+    });
+
+    if (context.mounted) {
+      await Navigator.pushNamed(context, '/main');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,15 +61,15 @@ class _DonationForm extends State<DonationForm> {
                     Container(
                       width: 170,
                       height: 150,
-                      child: Image.asset(
-                        "lib/images/Lauren.png",
+                      child: Image.network(
+                        arg['heroPath'],
                         fit: BoxFit.cover,
                       ),
                     ),
                     const SizedBox(width: 10),
                     Flexible(
                       child: Text(
-                          "Your supporting ${arg["campaingTitle"]} by ${arg["fundraiserName"]}",
+                          "Your supporting ${arg["campaignTitle"]} by ${arg["fundraiserName"]}",
                           style: const TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 15)),
                     ),
@@ -201,6 +226,14 @@ class _DonationForm extends State<DonationForm> {
                       ],
                     ),
                   ),
+                ),
+                const SizedBox(height: 40),
+                Button(
+                  text: "Donate",
+                  onTap: () => createContribution(
+                      campaignName: arg["campaignTitle"],
+                      campaignId: arg["campaignId"],
+                      raisedMoney: arg["raised"]),
                 ),
                 const SizedBox(height: 40),
               ],

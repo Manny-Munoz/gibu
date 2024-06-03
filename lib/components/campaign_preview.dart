@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import "package:gibu/components/campaing_structure.dart";
 import 'package:gibu/components/progress_bar.dart';
 import 'package:gibu/components/double_to_currency.dart';
+import "package:firebase_auth/firebase_auth.dart";
 
 class CampaignPreview extends StatefulWidget {
   final String campaingTitlePreview;
@@ -11,24 +13,36 @@ class CampaignPreview extends StatefulWidget {
   final double raisedPreview;
   final double goalPreview;
   final String descriptionPreview;
+  final String campaignId;
+  final List<String> likes;
+  final String type;
 
-  const CampaignPreview({
-    super.key,
-    required this.campaingTitlePreview,
-    required this.imagePathPreview,
-    required this.heroPathPreview,
-    required this.fundraiserNamePreview,
-    required this.raisedPreview,
-    required this.goalPreview,
-    required this.descriptionPreview,
-  });
+  const CampaignPreview(
+      {super.key,
+      required this.campaingTitlePreview,
+      required this.imagePathPreview,
+      required this.heroPathPreview,
+      required this.fundraiserNamePreview,
+      required this.raisedPreview,
+      required this.goalPreview,
+      required this.descriptionPreview,
+      required this.likes,
+      required this.type,
+      required this.campaignId});
 
   @override
   State<CampaignPreview> createState() => _CampaignPreviewState();
 }
 
 class _CampaignPreviewState extends State<CampaignPreview> {
-  bool _isFavorite = false;
+  final currentUser = FirebaseAuth.instance.currentUser;
+  bool isLiked = false;
+
+  @override
+  void initState() {
+    super.initState();
+    isLiked = widget.likes.contains(currentUser!.uid);
+  }
 
   Widget textShortener() {
     String text = (widget.descriptionPreview.length >= 100)
@@ -66,6 +80,9 @@ class _CampaignPreviewState extends State<CampaignPreview> {
                       raised: widget.raisedPreview,
                       goal: widget.goalPreview,
                       description: widget.descriptionPreview,
+                      likes: widget.likes,
+                      campaignId: widget.campaignId,
+                      type: widget.type,
                     )));
       },
       child: Container(
@@ -84,7 +101,7 @@ class _CampaignPreviewState extends State<CampaignPreview> {
                 Container(
                   width: 100.0,
                   height: 100.0,
-                  child: Image.asset(
+                  child: Image.network(
                     widget.imagePathPreview,
                     fit: BoxFit.cover,
                   ),
@@ -109,15 +126,32 @@ class _CampaignPreviewState extends State<CampaignPreview> {
                               InkWell(
                                 onTap: () {
                                   setState(() {
-                                    _isFavorite = !_isFavorite;
+                                    isLiked = !isLiked;
+
+                                    DocumentReference campaign =
+                                        FirebaseFirestore.instance
+                                            .collection("campaigns")
+                                            .doc(widget.campaignId);
+
+                                    if (isLiked) {
+                                      campaign.update({
+                                        'likes': FieldValue.arrayUnion(
+                                            [currentUser!.uid])
+                                      });
+                                    } else {
+                                      campaign.update({
+                                        'likes': FieldValue.arrayRemove(
+                                            [currentUser!.uid])
+                                      });
+                                    }
                                   });
                                 },
-                                child: Image.asset(_isFavorite
-                                    ? "lib/images/heart-circle.png"
-                                    : "lib/images/heart-circle-favorite.png"),
+                                child: Image.asset(isLiked
+                                    ? "lib/images/heart-circle-favorite.png"
+                                    : "lib/images/heart-circle.png"),
                               ),
                             ],
-                          ),                        
+                          ),
                         ],
                       ),
                       const SizedBox(height: 5),

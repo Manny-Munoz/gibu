@@ -5,6 +5,8 @@ import "package:gibu/components/complete_divider.dart";
 import 'package:url_launcher/url_launcher.dart';
 import 'package:gibu/components/rate_app.dart';
 import 'package:gibu/components/campaign_list.dart';
+import "package:firebase_auth/firebase_auth.dart";
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -38,10 +40,23 @@ class _ProfileState extends State<Profile> {
                   "Profile",
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                 ),
-                const ProfileStrcture(
-                    imageProfile: "lib/images/profile (2).png",
-                    username: "Monika Islam",
-                    email: "monikaislam123@gmail.com"),
+                StreamBuilder<DocumentSnapshot>(
+                  stream: FirebaseFirestore.instance
+                      .collection('users')
+                      .doc(FirebaseAuth.instance.currentUser?.uid)
+                      .snapshots(),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<DocumentSnapshot> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const CircularProgressIndicator();
+                    } else {
+                      return ProfileStrcture(
+                          imageProfile: snapshot.data?['profile picture'] ?? "",
+                          username: snapshot.data?['username'],
+                          email: snapshot.data?['email']);
+                    }
+                  },
+                ),
                 const SizedBox(height: 30),
                 Row(
                   children: [
@@ -210,6 +225,99 @@ class _ProfileState extends State<Profile> {
                   ],
                 ),
                 const CompleteDivider(),
+                Row(
+                  children: [
+                    const SizedBox(width: 40),
+                    Image.asset("lib/images/campaign.png"),
+                    const SizedBox(width: 15),
+                    TextButton(
+                        onPressed: () => showDialog<String>(
+                            context: context,
+                            builder: (BuildContext context) => Dialog(
+                                  surfaceTintColor: Colors.white,
+                                  backgroundColor: Colors.white,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(6.0),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        const SizedBox(height: 10),
+                                        const Text(
+                                          "Contributions",
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        const SizedBox(height: 8),
+                                        StreamBuilder<DocumentSnapshot>(
+                                          stream: FirebaseFirestore.instance
+                                              .collection('users')
+                                              .doc(FirebaseAuth
+                                                  .instance.currentUser?.uid)
+                                              .snapshots(),
+                                          builder: (BuildContext context,
+                                              AsyncSnapshot<DocumentSnapshot>
+                                                  snapshot) {
+                                            if (snapshot.connectionState ==
+                                                ConnectionState.waiting) {
+                                              return const CircularProgressIndicator();
+                                            } else {
+                                              final contributions = snapshot
+                                                      .data?['contributions']
+                                                  as List<dynamic>?;
+                                              if (contributions != null) {
+                                                final campaignWidgets =
+                                                    contributions
+                                                        .map((contribution) {
+                                                  final campaignName =
+                                                      contribution[
+                                                          'campaignName'];
+                                                  final monthsLeft =
+                                                      contribution[
+                                                          'monthsLeft'];
+                                                  return ListTile(
+                                                    leading: const Icon(Icons
+                                                        .arrow_forward_ios),
+                                                    title: Text(
+                                                        'You are contributing to "$campaignName" with $monthsLeft months left.'),
+                                                  );
+                                                }).toList();
+                                                return Column(
+                                                    children: campaignWidgets);
+                                              } else {
+                                                return const Text(
+                                                    'No contributions found.');
+                                              }
+                                            }
+                                          },
+                                        ),
+                                        const SizedBox(height: 10),
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: const Text(
+                                            'Ok',
+                                            style: TextStyle(
+                                                color: Color.fromARGB(
+                                                    255, 23, 77, 77)),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                )),
+                        child: const Text(
+                          "Constributions",
+                          style: TextStyle(fontSize: 20, color: Colors.black),
+                          selectionColor: Colors.black,
+                        )),
+                  ],
+                ),
+                const CompleteDivider(),
                 const SizedBox(height: 10),
                 Row(
                   children: [
@@ -238,9 +346,26 @@ class _ProfileState extends State<Profile> {
                                               fontWeight: FontWeight.bold),
                                         ),
                                         const SizedBox(height: 8),
-                                        const CampaignList(
-                                            campaingName:
-                                                'Bring Lauren Home - Fund for Med-Flight & Recovery'),
+                                        StreamBuilder<DocumentSnapshot>(
+                                          stream: FirebaseFirestore.instance
+                                              .collection('users')
+                                              .doc(FirebaseAuth
+                                                  .instance.currentUser?.uid)
+                                              .snapshots(),
+                                          builder: (BuildContext context,
+                                              AsyncSnapshot<DocumentSnapshot>
+                                                  snapshot) {
+                                            if (snapshot.connectionState ==
+                                                ConnectionState.waiting) {
+                                              return const CircularProgressIndicator();
+                                            } else {
+                                              return CampaignList(
+                                                  campaigns: snapshot
+                                                      .data?['campaigns']
+                                                      .cast<String>());
+                                            }
+                                          },
+                                        ),
                                         const SizedBox(height: 10),
                                         TextButton(
                                           onPressed: () {
@@ -265,10 +390,10 @@ class _ProfileState extends State<Profile> {
                   ],
                 ),
                 const CompleteDivider(),
-                const SizedBox(height: 180),
+                const SizedBox(height: 110),
                 const Row(
                   mainAxisAlignment: MainAxisAlignment.end,
-                  children: [        
+                  children: [
                     Padding(
                       padding: EdgeInsets.only(right: 20.0),
                       child: LogoutButton(),

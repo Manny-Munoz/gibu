@@ -3,9 +3,10 @@ import "package:gibu/components/campaign_preview.dart";
 import "package:gibu/components/input_text.dart";
 import "package:gibu/components/text_alignment_left.dart";
 import "package:gibu/components/social_media_button.dart";
+import "package:firebase_auth/firebase_auth.dart";
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomePage extends StatelessWidget {
-  final name = "Monika";
   final controller = TextEditingController();
 
   HomePage({super.key});
@@ -17,8 +18,22 @@ class HomePage extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              TextAlignmentLeft(
-                text: "Hello, $name 👋",
+              StreamBuilder<DocumentSnapshot>(
+                stream: FirebaseFirestore.instance
+                    .collection('users')
+                    .doc(FirebaseAuth.instance.currentUser?.uid)
+                    .snapshots(),
+                builder: (BuildContext context,
+                    AsyncSnapshot<DocumentSnapshot> snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const CircularProgressIndicator();
+                  } else if (snapshot.hasError) {
+                    return TextAlignmentLeft(text: 'Error: ${snapshot.error}');
+                  } else {
+                    return TextAlignmentLeft(
+                        text: 'Hello, ${snapshot.data?['username']} 👋');
+                  }
+                },
               ),
               const SizedBox(height: 5),
               const TextAlignmentLeft(
@@ -64,7 +79,8 @@ class HomePage extends StatelessWidget {
                         )),
                         const SizedBox(height: 10),
                         GestureDetector(
-                          onTap: () => Navigator.pushNamed(context, '/startCampaign'),
+                          onTap: () =>
+                              Navigator.pushNamed(context, '/startCampaign'),
                           child: Container(
                             width: 150,
                             height: 50,
@@ -90,92 +106,93 @@ class HomePage extends StatelessWidget {
               ),
               const SizedBox(height: 15),
               const TextAlignmentLeft(
-                text: "Categories",
+                text: "Latest Campaigns",
               ),
-              const SizedBox(height: 15),
-              const Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Column(
-                  children: [
-                    ImageCard(
-                      imagePath: "lib/images/medical.png",
-                      backgroundColor: Color.fromARGB(155, 52, 145, 230),
-                      borderColor: Color.fromARGB(255, 52, 145, 230),
-                    ),
-                    SizedBox(height: 5),
-                    Text(
-                      "Medical",
-                    ),
-                  ],
-                ),
-                SizedBox(width: 20),
-                Column(
-                  children: [
-                    ImageCard(
-                      imagePath: "lib/images/educational.png",
-                      backgroundColor: Color.fromARGB(155, 37, 158, 164),
-                      borderColor: Color.fromARGB(255, 37, 158, 164),
-                    ),
-                    SizedBox(height: 5),
-                    Text(
-                      "Educational",
-                    ),
-                  ],
-                ),
-                SizedBox(width: 20),
-                Column(
-                  children: [
-                    ImageCard(
-                      imagePath: "lib/images/non-profit.png",
-                      backgroundColor: Color.fromARGB(155, 255, 153, 0),
-                      borderColor: Color.fromARGB(255, 255, 153, 0),
-                    ),
-                    SizedBox(height: 5),
-                    Text(
-                      "Non-profit",
-                    ),
-                  ],
-                ),
-              ]),
-              const Padding(
-                  padding: EdgeInsets.all(10.0),
+              // const TextAlignmentLeft(
+              //   text: "Categories",
+              // ),
+              // const SizedBox(height: 15),
+              // const Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              //   Column(
+              //     children: [
+              //       ImageCard(
+              //         imagePath: "lib/images/medical.png",
+              //         backgroundColor: Color.fromARGB(155, 52, 145, 230),
+              //         borderColor: Color.fromARGB(255, 52, 145, 230),
+              //       ),
+              //       SizedBox(height: 5),
+              //       Text(
+              //         "Medical",
+              //       ),
+              //     ],
+              //   ),
+              //   SizedBox(width: 20),
+              //   Column(
+              //     children: [
+              //       ImageCard(
+              //         imagePath: "lib/images/educational.png",
+              //         backgroundColor: Color.fromARGB(155, 37, 158, 164),
+              //         borderColor: Color.fromARGB(255, 37, 158, 164),
+              //       ),
+              //       SizedBox(height: 5),
+              //       Text(
+              //         "Educational",
+              //       ),
+              //     ],
+              //   ),
+              //   SizedBox(width: 20),
+              //   Column(
+              //     children: [
+              //       ImageCard(
+              //         imagePath: "lib/images/non-profit.png",
+              //         backgroundColor: Color.fromARGB(155, 255, 153, 0),
+              //         borderColor: Color.fromARGB(255, 255, 153, 0),
+              //       ),
+              //       SizedBox(height: 5),
+              //       Text(
+              //         "Non-profit",
+              //       ),
+              //     ],
+              //   ),
+              // ]),
+              Padding(
+                  padding: const EdgeInsets.all(10.0),
                   child: Center(
-                    child: Column(
-                      children: [
-                        CampaignPreview(
-                          campaingTitlePreview:
-                              "Bring Lauren home: Fund for Med-Flight & recovery hello how are",
-                          imagePathPreview: "lib/images/Lauren.png",
-                          heroPathPreview: "lib/images/profile.png",
-                          fundraiserNamePreview: "Monika Islam",
-                          raisedPreview: 131234.00,
-                          goalPreview: 250000.00,
-                          descriptionPreview:
-                              "Today I reach out to you with a heavy heart, asking for your help during an unimaginably difficult time for a family very near and dear to me. Today I reach out to you with a heavy heart, asking for your help during an unimaginably difficult time for a family very near and dear to me. Today I reach out to you with a heavy heart, asking for your help during an unimaginably difficult time for a family very near and dear to me.",
-                        ),
-                        CampaignPreview(
-                          campaingTitlePreview:
-                              "Bring Lauren home: Fund for Med-Flight & recovery hello how are",
-                          imagePathPreview: "lib/images/Lauren.png",
-                          heroPathPreview: "lib/images/profile.png",
-                          fundraiserNamePreview: "Monika Islam",
-                          raisedPreview: 5000.00,
-                          goalPreview: 250000.00,
-                          descriptionPreview:
-                              "Today I reach out to you with a heavy heart, asking for your help during an unimaginably difficult time for a family very near and dear to me. Today I reach out to you with a heavy heart, asking for your help during an unimaginably difficult time for a family very near and dear to me. Today I reach out to you with a heavy heart, asking for your help during an unimaginably difficult time for a family very near and dear to me.",
-                        ),
-                        CampaignPreview(
-                          campaingTitlePreview:
-                              "Bring Lauren home: Fund for Med-Flight & recovery hello how are",
-                          imagePathPreview: "lib/images/Lauren.png",
-                          heroPathPreview: "lib/images/profile.png",
-                          fundraiserNamePreview: "Monika Islam",
-                          raisedPreview: 400000.00,
-                          goalPreview: 250000.00,
-                          descriptionPreview:
-                              "Today I reach out to you with a heavy heart, asking for your help during an unimaginably difficult time for a family very near and dear to me. Today I reach out to you with a heavy heart, asking for your help during an unimaginably difficult time for a family very near and dear to me. Today I reach out to you with a heavy heart, asking for your help during an unimaginably difficult time for a family very near and dear to me.",
-                        ),
-                      ],
-                    ),
+                    child: StreamBuilder(
+                        stream: FirebaseFirestore.instance
+                            .collection("campaigns")
+                            .snapshots(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            return ListView.builder(
+                                shrinkWrap: true,
+                                physics: const ClampingScrollPhysics(),
+                                itemCount: snapshot.data!.docs.length,
+                                itemBuilder: (context, index) {
+                                  final campaign = snapshot.data!.docs[index];
+                                  return CampaignPreview(
+                                    campaignId: campaign.id,
+                                    campaingTitlePreview: campaign['title'],
+                                    imagePathPreview: campaign['image'],
+                                    heroPathPreview: campaign['hero'],
+                                    fundraiserNamePreview:
+                                        campaign['fundraiser'],
+                                    raisedPreview:
+                                        (campaign['raised'] as num).toDouble(),
+                                    goalPreview:
+                                        (campaign['goal'] as num).toDouble(),
+                                    descriptionPreview: campaign['description'],
+                                    likes: List<String>.from(
+                                        campaign['likes'] ?? []),
+                                    type: campaign['type'],
+                                  );
+                                });
+                          } else if (snapshot.hasError) {
+                            return Text("Error: ${snapshot.error}");
+                          }
+                          return const Center(
+                              child: CircularProgressIndicator());
+                        }),
                   )),
             ],
           ),

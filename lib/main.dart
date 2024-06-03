@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
         '/profile': (context) => const Profile(),
         '/main': (context) => const MainPage(),
         '/startCampaign': (context) => const StartCampaignPage(),
-        '/fillOutCampaign': (context) => FillOutCampaign(),
+        '/fillOutCampaign': (context) => const FillOutCampaign(),
         '/donationForm': (context) => const DonationForm(),
         '/auth': (context) => const AuthPage(),    
       },

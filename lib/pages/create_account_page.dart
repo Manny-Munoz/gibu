@@ -3,11 +3,13 @@ import 'package:gibu/components/input_text.dart';
 import 'package:gibu/components/text_alignment_left.dart';
 import 'package:gibu/components/button.dart';
 import 'package:flutter/services.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CreateAccountPage extends StatefulWidget {
   final Function()? onTap;
 
-  const CreateAccountPage({super.key , required this.onTap});
+  const CreateAccountPage({super.key, required this.onTap});
 
   @override
   State<CreateAccountPage> createState() => _CreateAccountPageState();
@@ -17,10 +19,43 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
   bool _isChecked = false;
 
   final usernameController = TextEditingController();
-
   final passwordController = TextEditingController();
+  final emailController = TextEditingController();
 
-  final emailConstroller = TextEditingController();
+  signUserIn() async {
+    try {
+      if (_isChecked != true) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            content: Text("Please accept the terms and privacy policy")));
+        return;
+      } else {
+        UserCredential userCredential = await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(
+                email: emailController.text, password: passwordController.text);
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(userCredential.user!.uid)
+            .set({
+          'username': usernameController.text,
+          'email': emailController.text,
+          'language': 'en',
+          'campaigns': [],
+          'likedCampaigns': [],
+          'profile picture': '',
+          'contributions': [],
+        });
+      }
+    } on FirebaseAuthException catch (e) {
+      displayMessage(e.code);
+    }
+  }
+
+  void displayMessage(final String message) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(title: Text(message)),
+    );
+  }
 
   @override
   void initState() {
@@ -69,7 +104,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                   const TextAlignmentLeft(text: "Email"),
                   const SizedBox(height: 9),
                   InputText(
-                      controller: emailConstroller,
+                      controller: emailController,
                       hintText: "Your name",
                       obscureText: false),
                   const SizedBox(height: 15),
@@ -100,7 +135,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                     ),
                   ),
                   const SizedBox(height: 60),
-                  Button(onTap: () => Navigator.pushNamed(context, '/main')),
+                  Button(onTap: () => signUserIn()),
                   const SizedBox(height: 70),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
